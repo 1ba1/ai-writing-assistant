@@ -1,10 +1,19 @@
 import { useState } from "react"
 import {
   BtnBold,
+  BtnBulletList,
   BtnItalic,
+  BtnLink,
+  BtnNumberedList,
+  BtnRedo,
+  BtnStrikeThrough,
+  BtnUnderline,
+  BtnUndo,
   ContentEditableEvent,
   Editor,
   EditorProvider,
+  HtmlButton,
+  Separator,
   Toolbar,
 } from "react-simple-wysiwyg"
 
@@ -25,8 +34,19 @@ const TextEditor = ({ onTextChange }: Props) => {
       <EditorProvider>
         <Editor value={content} onChange={handleChange}>
           <Toolbar>
+            <BtnUndo />
+            <BtnRedo />
+            <Separator />
             <BtnBold />
             <BtnItalic />
+            <BtnUnderline />
+            <BtnStrikeThrough />
+            <Separator />
+            <BtnNumberedList />
+            <BtnBulletList />
+            <Separator />
+            <BtnLink />
+            <HtmlButton />
           </Toolbar>
         </Editor>
       </EditorProvider>
