@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState } from 'react'
 import {
   BtnBold,
   BtnBulletList,
@@ -15,14 +15,14 @@ import {
   HtmlButton,
   Separator,
   Toolbar,
-} from "react-simple-wysiwyg"
+} from 'react-simple-wysiwyg'
 
 interface Props {
   onTextChange: (value: string) => void
 }
 
 const TextEditor = ({ onTextChange }: Props) => {
-  const [content, setContent] = useState<string>("")
+  const [content, setContent] = useState<string>('')
 
   const handleChange = (e: ContentEditableEvent) => {
     setContent(e.target.value)
@@ -30,7 +30,7 @@ const TextEditor = ({ onTextChange }: Props) => {
   }
 
   return (
-    <div className="text-black">
+    <div className="text-black max-h-80">
       <EditorProvider>
         <Editor value={content} onChange={handleChange}>
           <Toolbar>
