@@ -41,19 +41,19 @@ function App() {
   }
 
   return (
-    <div className="bg-gray-50 min-h-screen p-8">
-      <h1 className="text-3xl font-bold text-gray-800 mb-8">
+    <div className="bg-gray-50 min-h-screen min-w-screen p-8">
+      <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center md:text-left">
         AI Writing Assistant
       </h1>
-      <div className="py-10 px-4 flex items-start justify-around">
-        <div className="w-2/5">
+      <div className="py-10 px-4 flex items-start justify-around flex-col md:flex-row">
+        <div className="w-full md:w-2/5">
           <TextEditor onTextChange={setInputText} />
           <Controls
             onGenerate={handleGenerate}
             onToneChange={handleToneChange}
           />
         </div>
-        <div className="w-2/5">
+        <div className="w-full md:w-2/5">
           {loading ? (
             <Spinner />
           ) : error ? (
