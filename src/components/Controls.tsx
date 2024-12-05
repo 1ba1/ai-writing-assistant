@@ -1,5 +1,5 @@
 interface Props {
-  onGenerate: (action: 'summarize' | null) => void
+  onGenerate: (action?: string) => void
   onToneChange: (v: string) => void
 }
 
@@ -15,7 +15,7 @@ const Controls = ({ onGenerate, onToneChange }: Props) => {
         <option value="Persuasive">Persuasive</option>
       </select>
       <button
-        onClick={() => onGenerate(null)}
+        onClick={() => onGenerate()}
         className="px-4 py-2 bg-blue-600 text-white rounded-md shadow-sm transform transition-transform hover:scale-105 hover:bg-blue-700"
       >
         Generate Response

@@ -16,7 +16,7 @@ function App() {
     setTone(selectedTone)
   }
 
-  const handleGenerate = async (action: 'summarize' | null) => {
+  const handleGenerate = async (action?: string) => {
     if (!inputText.trim()) {
       setError('Input cannot be empty!')
       return
@@ -28,7 +28,6 @@ function App() {
         action === 'summarize'
           ? `Summarize the following text:\n\n${inputText}`
           : `Respond in a ${tone} tone:\n\n${inputText}`
-      // Call OpenAI API with user input as a message
       const aiResponse = await generateText([{ role: 'user', content: prompt }])
       setResult(aiResponse)
     } catch (error) {
