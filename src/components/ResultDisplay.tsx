@@ -4,7 +4,7 @@ const ResultDisplay = ({ result }: { result: string | null }) => {
   return (
     <>
       <div
-        className={`mt-6 md:mt-0 overflow-y-auto min-h-80 max-h-80 p-4 bg-gray-100 rounded-md shadow-inner transition-opacity duration-500 ${
+        className={`mt-6 md:mt-0 overflow-y-auto min-h-[300px] max-h-[300px] p-4 bg-gray-100 rounded-md shadow-inner transition-opacity duration-500 ${
           result ? 'opacity-100' : 'opacity-0'
         }`}
       >

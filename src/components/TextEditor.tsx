@@ -32,7 +32,11 @@ const TextEditor = ({ onTextChange }: Props) => {
   return (
     <div className="text-black max-h-80">
       <EditorProvider>
-        <Editor value={content} onChange={handleChange}>
+        <Editor
+          value={content}
+          onChange={handleChange}
+          className="bg-white min-h-[300px] max-h-[300px] overflow-auto"
+        >
           <Toolbar>
             <BtnUndo />
             <BtnRedo />
