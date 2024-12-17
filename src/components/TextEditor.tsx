@@ -30,31 +30,29 @@ const TextEditor = ({ onTextChange }: Props) => {
   }
 
   return (
-    <div className="text-black max-h-80">
-      <EditorProvider>
-        <Editor
-          value={content}
-          onChange={handleChange}
-          className="bg-white min-h-[300px] max-h-[300px] overflow-auto"
-        >
-          <Toolbar>
-            <BtnUndo />
-            <BtnRedo />
-            <Separator />
-            <BtnBold />
-            <BtnItalic />
-            <BtnUnderline />
-            <BtnStrikeThrough />
-            <Separator />
-            <BtnNumberedList />
-            <BtnBulletList />
-            <Separator />
-            <BtnLink />
-            <HtmlButton />
-          </Toolbar>
-        </Editor>
-      </EditorProvider>
-    </div>
+    <EditorProvider>
+      <Editor
+        value={content}
+        onChange={handleChange}
+        className="bg-white text-black min-h-[320px] max-h-[320px] overflow-auto"
+      >
+        <Toolbar>
+          <BtnUndo />
+          <BtnRedo />
+          <Separator />
+          <BtnBold />
+          <BtnItalic />
+          <BtnUnderline />
+          <BtnStrikeThrough />
+          <Separator />
+          <BtnNumberedList />
+          <BtnBulletList />
+          <Separator />
+          <BtnLink />
+          <HtmlButton />
+        </Toolbar>
+      </Editor>
+    </EditorProvider>
   )
 }
 

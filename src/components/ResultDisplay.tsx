@@ -1,29 +1,44 @@
+import { useState } from 'react'
 import { downloadWordFile } from '../utils/downloadWordFile'
+import { Check, Copy } from 'lucide-react'
 
 const ResultDisplay = ({ result }: { result: string | null }) => {
+  const [copied, setCopied] = useState(false)
+
+  async function copyToClipboard() {
+    if ('clipboard' in navigator && result) {
+      await navigator.clipboard.writeText(result)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 5000)
+    }
+  }
+
+  if (!result) return null
+
   return (
-    <>
-      <div
-        className={`mt-6 md:mt-0 overflow-y-auto min-h-[300px] max-h-[300px] p-4 bg-gray-100 rounded-md shadow-inner transition-opacity duration-500 ${
-          result ? 'opacity-100' : 'opacity-0'
-        }`}
-      >
+    <div className="flex flex-col justify-around h-[435px]">
+      <div className="relative p-2 min-h-[358px] max-h-[358px] overflow-y-auto bg-gray-100 rounded-md shadow-inner transition-opacity duration-500">
         <h3 className="text-lg font-semibold text-gray-700 mb-2">
           AI Response:
         </h3>
-        <div className="text-gray-800">
-          {result || 'No result yet. Generate something!'}
+        <div className="absolute top-2 right-2 cursor-pointer">
+          {copied ? (
+            <Check color="black" />
+          ) : (
+            <Copy color="black" onClick={copyToClipboard} />
+          )}
         </div>
+        <article className="text-gray-800">{result}</article>
       </div>
-      {result && (
+      <div className="text-center">
         <button
-          className="mt-5 bg-gradient-to-r from-blue-500 to-blue-700 text-white text-lg px-6 py-3 rounded-md shadow-lg hover:shadow-xl hover:from-blue-600 hover:to-blue-800 transition transform hover:-translate-y-1"
+          className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-md hover:from-blue-500 hover:to-blue-500"
           onClick={() => downloadWordFile(result)}
         >
           Download as Word
         </button>
-      )}
-    </>
+      </div>
+    </div>
   )
 }
 

@@ -2,8 +2,8 @@ import { useState } from 'react'
 import Controls from './components/Controls'
 import ResultDisplay from './components/ResultDisplay'
 import TextEditor from './components/TextEditor'
-import Spinner from './components/Spinner'
 import { generateText } from './services/api'
+import Skeleton from './components/Skeleton'
 
 function App() {
   const [inputText, setInputText] = useState('')
@@ -40,24 +40,24 @@ function App() {
   }
 
   return (
-    <>
+    <div className="min-h-screen min-w-screen">
       <header className="bg-gray-700 py-2">
         <h1 className="text-3xl font-bold text-white text-center lg:text-left lg:ml-2">
           AI Writing Assistant
         </h1>
       </header>
-      <div className="min-h-screen min-w-screen p-4">
+      <div className="p-4">
         <div className="py-10 px-4 flex items-start justify-around flex-col lg:flex-row">
-          <div className="w-full xl:w-2/5 border-2 border-gray rounded-lg p-3 bg-gray-700">
+          <div className="w-full xl:w-2/5 rounded-lg p-3 bg-gray-700 flex flex-col justify-around min-h-[460px] max-h-[460px]">
             <TextEditor onTextChange={setInputText} />
             <Controls
               onGenerate={handleGenerate}
               onToneChange={handleToneChange}
             />
           </div>
-          <div className="w-full xl:w-2/5">
+          <div className="mt-10 lg:mt-0 w-full xl:w-2/5 rounded-lg p-3 bg-gray-700 min-h-[460px] max-h-[460px]">
             {loading ? (
-              <Spinner />
+              <Skeleton />
             ) : error ? (
               <div className="text-center mt-6 text-red-500">{error}</div>
             ) : (
@@ -66,7 +66,7 @@ function App() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

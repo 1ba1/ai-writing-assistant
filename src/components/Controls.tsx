@@ -5,7 +5,7 @@ interface Props {
 
 const Controls = ({ onGenerate, onToneChange }: Props) => {
   return (
-    <div className="mt-6 flex-wrap flex flex-col xl:flex-row justify-around xl:items-center space-y-2 xl:space-y-0 h-40 xl:h-auto">
+    <div className="mt-4 sm:mt-0 flex-wrap flex flex-col sm:flex-row justify-around sm:items-center space-y-2 xl:space-y-0 xl:h-auto">
       <select
         onChange={(e) => onToneChange(e.target.value)}
         className="bg-white border-gray-300 text-black px-4 py-2 border-2 rounded-md"
