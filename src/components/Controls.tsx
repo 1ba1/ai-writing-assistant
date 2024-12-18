@@ -24,7 +24,7 @@ const Controls = ({ onGenerate, onToneChange }: Props) => {
 
       <button
         onClick={() => onGenerate('summarize')}
-        className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700"
+        className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-500"
       >
         Summarize
       </button>
