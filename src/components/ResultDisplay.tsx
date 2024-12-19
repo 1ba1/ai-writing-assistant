@@ -2,7 +2,12 @@ import { useState } from 'react'
 import { downloadWordFile } from '../utils/downloadWordFile'
 import { Check, Copy } from 'lucide-react'
 
-const ResultDisplay = ({ result }: { result: string | null }) => {
+interface Props {
+  result: string | null
+  onClearEditor: () => void
+}
+
+const ResultDisplay = ({ result, onClearEditor }: Props) => {
   const [copied, setCopied] = useState(false)
 
   async function copyToClipboard() {
@@ -16,18 +21,16 @@ const ResultDisplay = ({ result }: { result: string | null }) => {
   if (!result) return null
 
   return (
-    <div className="flex flex-col justify-around h-[435px]">
-      <div className="relative p-2 min-h-[358px] max-h-[358px] overflow-y-auto bg-gray-100 rounded-md shadow-inner transition-opacity duration-500">
-        <h3 className="text-lg font-semibold text-gray-700 mb-2">
-          AI Response:
-        </h3>
-        <div className="absolute top-2 right-2 cursor-pointer">
-          {copied ? (
-            <Check color="black" />
-          ) : (
-            <Copy color="black" onClick={copyToClipboard} />
-          )}
-        </div>
+    <div className="relative flex flex-col justify-around h-[435px]">
+      <div className="absolute top-5 right-4 cursor-pointer">
+        {copied ? (
+          <Check color="black" />
+        ) : (
+          <Copy color="black" onClick={copyToClipboard} />
+        )}
+      </div>
+      <div className="p-2 min-h-[358px] max-h-[358px] overflow-y-auto bg-gray-100 rounded-md shadow-inner transition-opacity duration-500">
+        <h3 className="text-lg font-semibold text-gray-700 mb-2">Response:</h3>
         <article className="text-gray-800">{result}</article>
       </div>
       <div className="text-center">
@@ -36,6 +39,12 @@ const ResultDisplay = ({ result }: { result: string | null }) => {
           onClick={() => downloadWordFile(result)}
         >
           Download as Word
+        </button>
+        <button
+          onClick={onClearEditor}
+          className="ml-5 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+        >
+          Clear Response
         </button>
       </div>
     </div>
