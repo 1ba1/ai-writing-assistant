@@ -13,7 +13,10 @@ const Skeleton = () => {
       <div className="bg-gray-500 h-4 rounded-sm"></div>
       <div className="bg-gray-500 h-4 rounded-sm"></div>
       <div className="bg-gray-500 h-4 rounded-sm"></div>
-      <div className="bg-gray-500 h-8 w-32 self-center rounded-sm"></div>
+      <div className="self-center flex">
+        <div className="bg-gray-500 h-8 w-32 rounded-sm"></div>
+        <div className="bg-gray-500 h-8 w-32 ml-4 rounded-sm"></div>
+      </div>
     </div>
   )
 }

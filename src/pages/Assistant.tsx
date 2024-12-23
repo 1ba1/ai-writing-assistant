@@ -13,7 +13,7 @@ function Assistant() {
   return (
     <div className="min-h-screen min-w-screen">
       <header className="bg-gray-700 py-2 flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-white text-center lg:text-left lg:ml-2">
+        <h1 className="text-3xl font-bold text-white text-center lg:text-left md:ml-2">
           AI Writing Assistant
         </h1>
         <div title="Sign out">
@@ -28,6 +28,7 @@ function Assistant() {
         <div className="py-10 px-4 flex items-start justify-around flex-col lg:flex-row">
           <div className="w-full xl:w-2/5 rounded-lg p-3 bg-gray-700 flex flex-col justify-around min-h-[460px] max-h-[460px]">
             <TextEditor
+              loading={loading}
               setLoading={setLoading}
               setError={setError}
               setResult={setResult}

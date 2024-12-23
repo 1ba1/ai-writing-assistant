@@ -20,13 +20,14 @@ import Controls from './Controls'
 import { Action } from '../types'
 import { generateText } from '../services/api'
 
-interface Props {
+type Props = {
+  loading: boolean
   setLoading: (v: boolean) => void
   setError: (v: string) => void
   setResult: (v: string) => void
 }
 
-const TextEditor = ({ setLoading, setError, setResult }: Props) => {
+const TextEditor = ({ loading, setLoading, setError, setResult }: Props) => {
   const editorRef = useRef<HTMLDivElement>(null)
   const [content, setContent] = useState<string>('')
   const [tone, setTone] = useState('Formal')
@@ -37,7 +38,7 @@ const TextEditor = ({ setLoading, setError, setResult }: Props) => {
     setTone(selectedTone)
   }
 
-  const handleGenerate = async (action?: Action) => {
+  const handleGenerate = async (action?: Action): Promise<void> => {
     if (!content.trim()) {
       setError('Input cannot be empty!')
       return
@@ -61,7 +62,7 @@ const TextEditor = ({ setLoading, setError, setResult }: Props) => {
   }
 
   const handleChange = (e: ContentEditableEvent) => {
-    setContent(e.target.value)
+    setContent(e.target.value.replace(/<br>/g, '').replace(/&nbsp;/g, ' '))
   }
 
   return (
@@ -90,10 +91,12 @@ const TextEditor = ({ setLoading, setError, setResult }: Props) => {
           </Toolbar>
         </Editor>
       </EditorProvider>
+
       <Controls
         onGenerate={handleGenerate}
         onToneChange={handleToneChange}
         onClearEditor={() => setContent('')}
+        buttonsDisabled={!content.trim() || loading}
       />
     </>
   )

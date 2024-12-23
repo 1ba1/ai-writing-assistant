@@ -1,12 +1,18 @@
 import { Action } from '../types'
 
-interface Props {
+type Props = {
   onGenerate: (action?: Action) => void
   onToneChange: (v: string) => void
   onClearEditor: () => void
+  buttonsDisabled: boolean
 }
 
-const Controls = ({ onGenerate, onToneChange, onClearEditor }: Props) => {
+const Controls = ({
+  onGenerate,
+  onToneChange,
+  onClearEditor,
+  buttonsDisabled,
+}: Props) => {
   return (
     <div className="mt-4 sm:mt-0 flex-wrap flex flex-col sm:flex-row justify-around sm:items-center space-y-2 xl:space-y-0 xl:h-auto">
       <select
@@ -21,21 +27,34 @@ const Controls = ({ onGenerate, onToneChange, onClearEditor }: Props) => {
 
       <button
         onClick={() => onGenerate()}
-        className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-md hover:from-blue-500 hover:to-blue-500"
+        className={`${
+          buttonsDisabled
+            ? 'opacity-50 cursor-not-allowed'
+            : 'hover:from-blue-500 hover:to-blue-500'
+        } px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-md`}
+        disabled={buttonsDisabled}
       >
         Generate Response
       </button>
 
       <button
         onClick={() => onGenerate(Action.SUMMARIZE)}
-        className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-500"
+        className={`${
+          buttonsDisabled
+            ? 'opacity-50 cursor-not-allowed'
+            : 'hover:bg-gray-500'
+        } px-4 py-2 bg-gray-600 text-white rounded-md`}
+        disabled={buttonsDisabled}
       >
         Summarize
       </button>
 
       <button
         onClick={onClearEditor}
-        className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+        className={`${
+          buttonsDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-red-600'
+        } px-4 py-2 bg-red-500 text-white rounded-md`}
+        disabled={buttonsDisabled}
       >
         Clear Editor
       </button>

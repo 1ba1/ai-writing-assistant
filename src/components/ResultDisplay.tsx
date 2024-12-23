@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { downloadWordFile } from '../utils/downloadWordFile'
 import { Check, Copy } from 'lucide-react'
 
-interface Props {
+type Props = {
   result: string | null
   onClearEditor: () => void
 }
