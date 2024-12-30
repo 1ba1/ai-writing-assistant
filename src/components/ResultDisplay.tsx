@@ -29,7 +29,7 @@ const ResultDisplay = ({ result, onClearEditor }: Props) => {
           <Copy color="black" onClick={copyToClipboard} />
         )}
       </div>
-      <div className="p-2 min-h-[358px] max-h-[358px] overflow-y-auto bg-gray-100 rounded-md shadow-inner transition-opacity duration-500">
+      <div className="p-4 min-h-[358px] max-h-[358px] overflow-y-auto bg-gray-100 rounded-md shadow-inner transition-opacity duration-500">
         <h3 className="text-lg font-semibold text-gray-700 mb-2">Response:</h3>
         <article className="text-gray-800">{result}</article>
       </div>

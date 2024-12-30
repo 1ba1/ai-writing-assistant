@@ -19,23 +19,51 @@ import {
 import Controls from './Controls'
 import { Action } from '../types'
 import { generateText } from '../services/api'
+import { updateCredits } from '../db'
+import { useSession } from '@clerk/clerk-react'
 
 type Props = {
   loading: boolean
   setLoading: (v: boolean) => void
   setError: (v: string) => void
   setResult: (v: string) => void
+  credits: number
+  setCredits: (v: number) => void
 }
 
-const TextEditor = ({ loading, setLoading, setError, setResult }: Props) => {
+const TextEditor = ({
+  loading,
+  setLoading,
+  setError,
+  setResult,
+  credits,
+  setCredits,
+}: Props) => {
   const editorRef = useRef<HTMLDivElement>(null)
   const [content, setContent] = useState<string>('')
   const [tone, setTone] = useState('Formal')
+
+  const { session } = useSession()
 
   useEffect(() => editorRef.current?.focus(), [])
 
   const handleToneChange = (selectedTone: string) => {
     setTone(selectedTone)
+  }
+
+  const handleUpdateCredits = async (): Promise<string | void> => {
+    if (session) {
+      try {
+        const email = session.user.emailAddresses[0].emailAddress
+        const result = await updateCredits(email, credits)
+        const { updatedCredits } = result[0]
+        setCredits(updatedCredits)
+      } catch (err) {
+        return err instanceof Error
+          ? console.error(err.message)
+          : 'An error occurred'
+      }
+    }
   }
 
   const handleGenerate = async (action?: Action): Promise<void> => {
@@ -52,6 +80,7 @@ const TextEditor = ({ loading, setLoading, setError, setResult }: Props) => {
           : `Respond in a ${tone} tone:\n\n${content}`
       const aiResponse = await generateText([{ role: 'user', content: prompt }])
       setResult(aiResponse)
+      await handleUpdateCredits()
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : 'An error occurred.'
@@ -72,23 +101,28 @@ const TextEditor = ({ loading, setLoading, setError, setResult }: Props) => {
           ref={editorRef}
           value={content}
           onChange={handleChange}
-          className="bg-white text-black min-h-[320px] max-h-[320px] overflow-auto"
+          className={`${
+            !credits ? 'cursor-not-allowed' : ''
+          } bg-white text-black min-h-[320px] max-h-[320px] overflow-auto`}
+          disabled={!credits}
         >
-          <Toolbar>
-            <BtnUndo />
-            <BtnRedo />
-            <Separator />
-            <BtnBold />
-            <BtnItalic />
-            <BtnUnderline />
-            <BtnStrikeThrough />
-            <Separator />
-            <BtnNumberedList />
-            <BtnBulletList />
-            <Separator />
-            <BtnLink />
-            <HtmlButton />
-          </Toolbar>
+          <div className={!credits ? 'hidden pointer-events-none' : ''}>
+            <Toolbar>
+              <BtnUndo />
+              <BtnRedo />
+              <Separator />
+              <BtnBold />
+              <BtnItalic />
+              <BtnUnderline />
+              <BtnStrikeThrough />
+              <Separator />
+              <BtnNumberedList />
+              <BtnBulletList />
+              <Separator />
+              <BtnLink />
+              <HtmlButton />
+            </Toolbar>
+          </div>
         </Editor>
       </EditorProvider>
 
@@ -96,7 +130,7 @@ const TextEditor = ({ loading, setLoading, setError, setResult }: Props) => {
         onGenerate={handleGenerate}
         onToneChange={handleToneChange}
         onClearEditor={() => setContent('')}
-        buttonsDisabled={!content.trim() || loading}
+        buttonsDisabled={!content.trim() || loading || !credits}
       />
     </>
   )
