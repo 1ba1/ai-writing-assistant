@@ -14,13 +14,13 @@ const Controls = ({
   buttonsDisabled,
 }: Props) => {
   return (
-    <div className="mt-4 sm:mt-0 flex-wrap flex flex-col sm:flex-row justify-around sm:items-center space-y-2 xl:space-y-0 xl:h-auto">
+    <div className="mt-4 sm:mt-0 flex-wrap flex flex-col gap-4 sm:flex-row justify-around sm:items-center space-y-2 xl:space-y-0 xl:h-auto">
       <select
         title={buttonsDisabled ? '' : 'Set the tone for the response'}
         onChange={(e) => onToneChange(e.target.value)}
         className={`${
           buttonsDisabled ? 'cursor-not-allowed' : 'cursor-pointer'
-        } px-4 py-[6.5px] bg-white border-gray-300 text-black border-1 rounded-md`}
+        } mt-2 xl:mt-0 px-4 py-[6.5px] bg-white border-gray-300 text-black border-1 rounded-md`}
         disabled={buttonsDisabled}
       >
         <option value="Formal">Formal</option>

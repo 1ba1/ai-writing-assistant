@@ -21,29 +21,22 @@ import { Action } from '../types'
 import { generateText } from '../services/api'
 import { updateCredits } from '../db'
 import { useSession } from '@clerk/clerk-react'
+import useCredits from '../hooks/useCredits'
 
 type Props = {
   loading: boolean
   setLoading: (v: boolean) => void
   setError: (v: string) => void
   setResult: (v: string) => void
-  credits: number
-  setCredits: (v: number) => void
 }
 
-const TextEditor = ({
-  loading,
-  setLoading,
-  setError,
-  setResult,
-  credits,
-  setCredits,
-}: Props) => {
+const TextEditor = ({ loading, setLoading, setError, setResult }: Props) => {
   const editorRef = useRef<HTMLDivElement>(null)
   const [content, setContent] = useState<string>('')
   const [tone, setTone] = useState('Formal')
 
   const { session } = useSession()
+  const { credits, setCredits } = useCredits()
 
   useEffect(() => editorRef.current?.focus(), [])
 
@@ -55,7 +48,7 @@ const TextEditor = ({
     if (session) {
       try {
         const email = session.user.emailAddresses[0].emailAddress
-        const result = await updateCredits(email, credits)
+        const result = await updateCredits(email, credits!)
         const { updatedCredits } = result[0]
         setCredits(updatedCredits)
       } catch (err) {

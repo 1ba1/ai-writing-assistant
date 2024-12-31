@@ -1,18 +1,18 @@
-import { SignedIn, SignOutButton, useSession } from '@clerk/clerk-react'
-import { LogOutIcon } from 'lucide-react'
+import { useSession } from '@clerk/clerk-react'
 import { useEffect, useState } from 'react'
 import ResultDisplay from '../components/ResultDisplay'
 import Skeleton from '../components/Skeleton'
 import TextEditor from '../components/TextEditor'
 import { getCreditsFromEmail } from '../db'
+import useCredits from '../hooks/useCredits'
 
 function Assistant() {
   const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-  const [credits, setCredits] = useState(0)
 
   const { session } = useSession()
+  const { credits, setCredits } = useCredits()
 
   useEffect(() => {
     async function getCredits(): Promise<string | void> {
@@ -31,35 +31,10 @@ function Assistant() {
     }
 
     getCredits()
-  }, [session])
+  }, [session, setCredits])
 
   return (
-    <div className="min-h-screen min-w-screen">
-      <header className="bg-gray-700 py-2 flex flex-col lg:flex-row justify-between items-center">
-        <h1 className="text-3xl font-bold text-white text-left ml-2">
-          AI Writing Assistant
-        </h1>
-
-        <div className="mr-2 flex flex-col lg:flex-row items-center justify-between lg:w-4/12">
-          <div>
-            <strong>User:</strong>{' '}
-            {session?.user.emailAddresses[0].emailAddress}
-          </div>
-
-          <div>
-            <strong>Credits:</strong> {credits}
-          </div>
-
-          <div title="Sign out">
-            <SignedIn>
-              <SignOutButton redirectUrl="/">
-                <LogOutIcon color="white" className="mr-2 cursor-pointer" />
-              </SignOutButton>
-            </SignedIn>
-          </div>
-        </div>
-      </header>
-
+    <div className="h-[calc(100vh-52px)] min-w-screen">
       <div className="p-4">
         {!credits && (
           <div className="grid place-content-center text-black">
@@ -74,8 +49,6 @@ function Assistant() {
               setLoading={setLoading}
               setError={setError}
               setResult={setResult}
-              credits={credits}
-              setCredits={setCredits}
             />
           </div>
 

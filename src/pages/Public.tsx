@@ -7,7 +7,7 @@ import {
 
 const Public = () => {
   return (
-    <div className="bg-gray-700 text-black pt-10 lg:pt-0 lg:grid lg:place-content-center min-h-screen">
+    <div className="bg-gray-700 text-black pt-10 lg:pt-0 lg:grid lg:place-content-center h-[calc(100vh-52px)]">
       <div className="lg:bg-gray-700 lg:w-full bg-white rounded-lg mx-auto w-5/6 md:w-1/2 p-8">
         <p className="lg:text-white text-gray-700 lg:text-4xl">
           Welcome to our AI writing assistant web app, where cutting-edge
