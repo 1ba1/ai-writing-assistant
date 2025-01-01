@@ -16,7 +16,7 @@ const Protected = () => {
 
   if (!isLoaded)
     return (
-      <div className="h-dvh grid place-content-center">
+      <div className="w-full h-[calc(100vh-52px)] grid place-content-center bg-gray-700">
         <Spinner />
       </div>
     )

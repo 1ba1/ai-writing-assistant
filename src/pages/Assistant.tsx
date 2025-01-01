@@ -1,18 +1,29 @@
 import { useSession } from '@clerk/clerk-react'
-import { useEffect, useState } from 'react'
+import { MouseEvent, useEffect, useState } from 'react'
 import ResultDisplay from '../components/ResultDisplay'
 import Skeleton from '../components/Skeleton'
 import TextEditor from '../components/TextEditor'
 import { getCreditsFromEmail } from '../db'
 import useCredits from '../hooks/useCredits'
+import suggestions from '../data/suggestions'
+
+interface DragEvent<T = Element> extends MouseEvent<T> {
+  dataTransfer: DataTransfer
+}
 
 function Assistant() {
   const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [showSuggestions, setShowSuggestions] = useState(false)
 
   const { session } = useSession()
   const { credits, setCredits } = useCredits()
+
+  const onDragStart = (e: DragEvent<HTMLDivElement>) => {
+    const text = (e.target as HTMLDivElement).innerText
+    e.dataTransfer?.setData('text', text)
+  }
 
   useEffect(() => {
     async function getCredits(): Promise<string | void> {
@@ -36,7 +47,7 @@ function Assistant() {
   return (
     <div className="h-[calc(100vh-52px)] min-w-screen">
       <div className="p-4">
-        {!credits && (
+        {credits === 0 && (
           <div className="grid place-content-center text-black">
             You have finished your credits.
           </div>
@@ -60,10 +71,46 @@ function Assistant() {
                 {error}
               </div>
             ) : (
-              <ResultDisplay
-                result={result}
-                onClearEditor={() => setResult('')}
-              />
+              <>
+                <ResultDisplay
+                  result={result}
+                  onClearEditor={() => setResult('')}
+                />
+
+                {!result && (
+                  <div className="flex items-center">
+                    <button
+                      onClick={() => setShowSuggestions((prev) => !prev)}
+                      className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-md hover:from-blue-500 hover:to-blue-500`"
+                    >
+                      {showSuggestions
+                        ? 'Hide Suggestions'
+                        : 'Show Suggestions'}
+                    </button>
+
+                    {showSuggestions && (
+                      <p className="ml-2 text-white">
+                        Drag and drop suggestions over to the editor
+                      </p>
+                    )}
+                  </div>
+                )}
+
+                {showSuggestions && !result && (
+                  <div className="mt-2 h-96 overflow-auto flex-col justify-around">
+                    {suggestions.map((suggestion, i) => (
+                      <div
+                        key={i}
+                        className="bg-white rounded-lg text-black mt-2 p-4 cursor-grab"
+                        draggable
+                        onDragStart={onDragStart}
+                      >
+                        {suggestion}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>

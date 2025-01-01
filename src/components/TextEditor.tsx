@@ -1,3 +1,4 @@
+import { useSession } from '@clerk/clerk-react'
 import { useEffect, useRef, useState } from 'react'
 import {
   BtnBold,
@@ -16,12 +17,11 @@ import {
   Separator,
   Toolbar,
 } from 'react-simple-wysiwyg'
-import Controls from './Controls'
-import { Action } from '../types'
-import { generateText } from '../services/api'
 import { updateCredits } from '../db'
-import { useSession } from '@clerk/clerk-react'
 import useCredits from '../hooks/useCredits'
+import { generateText } from '../services/api'
+import { Action } from '../types'
+import Controls from './Controls'
 
 type Props = {
   loading: boolean
