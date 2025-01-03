@@ -7,9 +7,9 @@ import {
 
 const Public = () => {
   return (
-    <div className="bg-gray-700 text-black pt-10 lg:pt-0 lg:grid lg:place-content-center h-[calc(100vh-52px)]">
-      <div className="lg:bg-gray-700 lg:w-full bg-white rounded-lg mx-auto w-5/6 md:w-1/2 p-8">
-        <p className="lg:text-white text-gray-700 lg:text-4xl">
+    <div className="bg-[url(assets/typewriter.jpg)] bg-[cover] p-4 lg:grid lg:place-content-center xl:place-content-start h-[calc(100vh-52px)]">
+      <div className="bg-gray-700 rounded-lg xl:mr-0 xl:ml-auto mx-auto md:w-4/6 w-full p-6">
+        <p className="text-white lg:text-2xl text-base">
           Welcome to our AI writing assistant web app, where cutting-edge
           technology meets creative expression. Our platform is designed to help
           you write with ease and confidence, providing you with intelligent
@@ -36,6 +36,16 @@ const Public = () => {
           </SignedIn>
         </div>
       </div>
+      <p className="text-gray-700 fixed bottom-1 right-2">
+        Photo by{' '}
+        <a href="https://unsplash.com/it/@hudsoncrafted?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">
+          Debby Hudson
+        </a>{' '}
+        on{' '}
+        <a href="https://unsplash.com/it/foto/fotografia-a-fuoco-selettiva-dei-tasti-della-macchina-da-scrivere-oVQBn0X2oEk?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">
+          Unsplash
+        </a>
+      </p>
     </div>
   )
 }

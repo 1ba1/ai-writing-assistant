@@ -14,7 +14,7 @@ const Controls = ({
   buttonsDisabled,
 }: Props) => {
   return (
-    <div className="mt-4 sm:mt-0 flex-wrap flex flex-col gap-4 sm:flex-row justify-around sm:items-center space-y-2 xl:space-y-0 xl:h-auto">
+    <div className="2xl:mt-0 lg:mt-4 sm:mt-0 flex-wrap flex flex-col gap-4 sm:flex-row justify-around sm:items-center space-y-2 xl:space-y-0 xl:h-auto">
       <select
         title={buttonsDisabled ? '' : 'Set the tone for the response'}
         onChange={(e) => onToneChange(e.target.value)}

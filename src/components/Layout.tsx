@@ -8,16 +8,11 @@ const Layout = () => {
   const { pathname } = useLocation()
   const { credits } = useCredits()
 
-  const landing = pathname === '/'
   const assistant = pathname === '/assistant'
 
   return (
     <>
-      <header
-        className={`${
-          landing ? 'border-b-2 border-bg-gray-500' : ''
-        } bg-gray-700 py-2 flex flex-col lg:flex-row justify-between items-center`}
-      >
+      <header className="bg-gray-700 py-2 flex flex-col lg:flex-row justify-between items-center">
         <h1 className="text-3xl font-bold text-white text-left ml-2">
           AI Writing Assistant
         </h1>
