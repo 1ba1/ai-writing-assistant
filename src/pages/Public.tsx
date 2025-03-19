@@ -8,8 +8,8 @@ import {
 const Public = () => {
   return (
     <div className="bg-[url(assets/typewriter.jpg)] bg-[cover] p-4 lg:grid lg:place-content-center xl:place-content-start h-[calc(100vh-52px)]">
-      <div className="bg-gray-700 rounded-lg xl:mr-0 xl:ml-auto mx-auto md:w-4/6 w-full p-6">
-        <p className="text-white lg:text-2xl text-base">
+      <div className="xl:bg-transparent bg-gray-700 rounded-lg xl:mr-0 xl:ml-auto mx-auto md:w-4/6 w-full p-6">
+        <p className="xl:text-gray-700 text-white lg:text-2xl text-base text-balance">
           Welcome to our AI writing assistant web app, where cutting-edge
           technology meets creative expression. Our platform is designed to help
           you write with ease and confidence, providing you with intelligent

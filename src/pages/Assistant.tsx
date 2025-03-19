@@ -1,5 +1,6 @@
 import { useSession } from '@clerk/clerk-react'
 import { MouseEvent, useEffect, useState } from 'react'
+import { Check } from 'lucide-react'
 import ResultDisplay from '../components/ResultDisplay'
 import Skeleton from '../components/Skeleton'
 import TextEditor from '../components/TextEditor'
@@ -16,6 +17,7 @@ function Assistant() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [showSuggestions, setShowSuggestions] = useState(false)
+  const [copiedSuggestion, setCopiedSuggestion] = useState<string | null>(null)
 
   const { session } = useSession()
   const { credits, setCredits } = useCredits()
@@ -23,6 +25,14 @@ function Assistant() {
   const onDragStart = (e: DragEvent<HTMLDivElement>) => {
     const text = (e.target as HTMLDivElement).innerText
     e.dataTransfer?.setData('text', text)
+  }
+
+  async function copyToClipboard(suggestion: string) {
+    if ('clipboard' in navigator && suggestion) {
+      await navigator.clipboard.writeText(suggestion)
+      setCopiedSuggestion(suggestion)
+      setTimeout(() => setCopiedSuggestion(null), 5000)
+    }
   }
 
   useEffect(() => {
@@ -89,9 +99,14 @@ function Assistant() {
                     </button>
 
                     {showSuggestions && (
-                      <p className="ml-2 text-white">
-                        Drag and drop suggestions over to the editor
-                      </p>
+                      <>
+                        <p className="ml-2 text-white hidden lg:block">
+                          Drag and drop suggestions over to the editor
+                        </p>
+                        <p className="lg:hidden text-white ml-2">
+                          Tap to copy suggestion
+                        </p>
+                      </>
                     )}
                   </div>
                 )}
@@ -101,11 +116,16 @@ function Assistant() {
                     {suggestions.map((suggestion, i) => (
                       <div
                         key={i}
-                        className="bg-white rounded-lg text-black mt-2 p-4 cursor-grab"
+                        className="bg-white rounded-lg text-black mt-2 p-4 lg:cursor-grab min-h-20 flex justify-center items-center"
                         draggable
                         onDragStart={onDragStart}
+                        onClick={() => copyToClipboard(suggestion)}
                       >
-                        {suggestion}
+                        {copiedSuggestion === suggestion ? (
+                          <Check />
+                        ) : (
+                          suggestion
+                        )}
                       </div>
                     ))}
                   </div>
