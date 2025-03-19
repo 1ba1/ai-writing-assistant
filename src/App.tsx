@@ -1,8 +1,10 @@
+import { lazy } from 'react'
 import { Route, Routes } from 'react-router'
 import Public from './pages/Public'
-import Assistant from './pages/Assistant'
 import Protected from './components/Protected'
 import Layout from './components/Layout'
+
+const Assistant = lazy(() => import('./pages/Assistant'))
 
 const App = () => {
   return (
