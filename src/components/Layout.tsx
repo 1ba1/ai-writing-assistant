@@ -50,7 +50,7 @@ const Layout = () => {
       </header>
 
       {assistant && isLoaded && (
-        <section className="p-2 h-12 bg-gradient-to-r from-red-500 to-indigo-600 flex justify-center items-center text-center">
+        <section className="p-2 h-24 lg:h-12 bg-gradient-to-r from-red-500 to-indigo-600 flex justify-center items-center text-center">
           Testing Phase: 5 credist available. (Look at the header top-right
           corner to see how many credits you have left)
         </section>
