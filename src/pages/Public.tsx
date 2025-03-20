@@ -3,9 +3,21 @@ import {
   SignedOut,
   SignInButton,
   SignOutButton,
+  useSession,
 } from '@clerk/clerk-react'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router'
 
 const Public = () => {
+  const navigate = useNavigate()
+  const { isSignedIn } = useSession()
+
+  useEffect(() => {
+    if (isSignedIn) {
+      navigate('/assistant')
+    }
+  }, [isSignedIn, navigate])
+
   return (
     <div className="bg-[url(assets/typewriter.jpg)] bg-[cover] p-4 lg:grid lg:place-content-center xl:place-content-start h-[calc(100vh-52px)]">
       <div className="xl:bg-transparent bg-gray-700 rounded-lg xl:mr-0 xl:ml-auto mx-auto md:w-4/6 w-full p-6">
