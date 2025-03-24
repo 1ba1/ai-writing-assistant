@@ -98,6 +98,7 @@ const TextEditor = ({ loading, setLoading, setError, setResult }: Props) => {
             !credits ? 'cursor-not-allowed' : ''
           } bg-white text-black min-h-[320px] max-h-[320px] overflow-auto`}
           disabled={!credits}
+          placeholder="Write your prompt here"
         >
           <div className={!credits ? 'hidden pointer-events-none' : ''}>
             <Toolbar>
