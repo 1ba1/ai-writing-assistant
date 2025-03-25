@@ -18,7 +18,7 @@ const Controls = ({
       <select
         title={buttonsDisabled ? '' : 'Set the tone for the response'}
         onChange={(e) => onToneChange(e.target.value)}
-        className={`${
+        className={`response-tone ${
           buttonsDisabled ? 'cursor-not-allowed' : 'cursor-pointer'
         } mt-2 xl:mt-0 px-4 py-[6.5px] bg-white border-gray-300 text-black border-1 rounded-md`}
         disabled={buttonsDisabled}
@@ -42,7 +42,7 @@ const Controls = ({
 
       <button
         onClick={() => onGenerate(Action.SUMMARIZE)}
-        className={`${
+        className={`summarize ${
           buttonsDisabled
             ? 'opacity-50 cursor-not-allowed'
             : 'hover:bg-gray-500'

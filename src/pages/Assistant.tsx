@@ -64,7 +64,7 @@ function Assistant() {
         )}
 
         <div className="py-10 px-4 flex items-start justify-around flex-col lg:flex-row">
-          <div className="w-full xl:w-2/5 rounded-lg p-3 bg-gray-700 flex flex-col justify-around min-h-[460px] max-h-[460px]">
+          <div className="editor w-full xl:w-2/5 rounded-lg p-3 bg-gray-700 flex flex-col justify-around min-h-[460px] max-h-[460px]">
             <TextEditor
               loading={loading}
               setLoading={setLoading}
@@ -73,7 +73,7 @@ function Assistant() {
             />
           </div>
 
-          <div className="mt-10 lg:mt-0 w-full xl:w-2/5 rounded-lg p-3 bg-gray-700 min-h-[460px] max-h-[460px]">
+          <div className="result-display mt-10 lg:mt-0 w-full xl:w-2/5 rounded-lg p-3 bg-gray-700 min-h-[460px] max-h-[460px]">
             {loading ? (
               <Skeleton />
             ) : error ? (
