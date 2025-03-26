@@ -5,6 +5,7 @@ import Protected from './components/Protected'
 import Layout from './components/Layout'
 
 const Assistant = lazy(() => import('./pages/Assistant'))
+const NotFound = lazy(() => import('./pages/NotFound'))
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="assistant" element={<Protected />}>
           <Route index element={<Assistant />} />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   )
