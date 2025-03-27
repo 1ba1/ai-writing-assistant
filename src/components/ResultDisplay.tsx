@@ -33,7 +33,7 @@ const ResultDisplay = ({ result, onClearEditor }: Props) => {
         <h3 className="text-lg font-semibold text-gray-700 mb-2">Response:</h3>
         <article className="text-gray-800">{result}</article>
       </div>
-      <div className="text-center">
+      <div className="flex justify-center mt-4">
         <button
           className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-md hover:from-blue-500 hover:to-blue-500"
           onClick={() => downloadWordFile(result)}
@@ -41,8 +41,8 @@ const ResultDisplay = ({ result, onClearEditor }: Props) => {
           Download as Word
         </button>
         <button
-          onClick={onClearEditor}
           className="ml-5 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+          onClick={onClearEditor}
         >
           Clear Response
         </button>
