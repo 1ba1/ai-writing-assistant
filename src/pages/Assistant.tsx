@@ -87,7 +87,7 @@ function Assistant() {
                   onClearEditor={() => setResult('')}
                 />
 
-                {!result && (
+                {!result && credits! > 0 && (
                   <div className="flex items-center">
                     <button
                       onClick={() => setShowSuggestions((prev) => !prev)}

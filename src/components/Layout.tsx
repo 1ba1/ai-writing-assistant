@@ -109,7 +109,7 @@ const Layout = () => {
         )}
       </header>
 
-      {assistant && isLoaded && (
+      {assistant && isLoaded && credits! > 0 && (
         <section className="p-2 h-24 lg:h-12 bg-gradient-to-r from-red-500 to-indigo-600 flex justify-center items-center text-center">
           Testing Phase: 5 credits available.
           <button
