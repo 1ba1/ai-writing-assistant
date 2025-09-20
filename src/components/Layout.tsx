@@ -111,7 +111,7 @@ const Layout = () => {
 
       {assistant && isLoaded && credits! > 0 && (
         <section className="p-2 h-24 lg:h-12 bg-gradient-to-r from-red-500 to-indigo-600 flex justify-center items-center text-center">
-          Testing Phase: 5 credits available.
+          Testing Phase: {credits} credits available.
           <button
             className="ml-2 px-2 py-1 bg-white text-black rounded-md"
             onClick={() => setState({ run: true, steps })}
